@@ -1,3 +1,22 @@
+# This repository is a fork
+
+The Retry-Action (this repository) executes the PRE and POST steps of the action that we are trying to retry, even if the action is disabled by a conditional `if` statement. This repository contains minor changes and adds the parameter `disable_pre_and_post`.
+
+## How to use this fork
+
+```yaml
+- uses: gmsllc/wretry.action@master
+  if: ${{ vpn_connection == 'true' }}
+  with:
+    action: action/openvpn@1.0.0
+    with: |
+      username: test
+      password: test123
+    attempt_limit: 3
+    attempt_delay: 2000
+    disable_pre_and_post: 'true'
+```
+
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
 
 # action::retry [![status](https://github.com/Wandalen/wretry.action/actions/workflows/wRetryActionPublish.yml/badge.svg)](https://github.com/Wandalen/wretry.action/actions/workflows/wRetryActionPublish.yml) [![stable](https://img.shields.io/badge/stability-stable-brightgreen.svg)](https://github.com/emersion/stability-badges#stable)
