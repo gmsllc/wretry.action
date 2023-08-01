@@ -29,6 +29,10 @@ inputs:
     description: A delay between attempts in ms
     required: false
     default: 0
+  disable_pre_and_post:
+    description: 'Disable Pre and Post hooks'
+    required: false
+    default: 'false'
 outputs:
   outputs:
     description: A pretty print JSON map with outputs from the wrapped action.
@@ -38,7 +42,7 @@ runs:
   steps:
     - name: retry
       id: retry
-      uses: Wandalen/wretry.action@v1.3.0_js_action
+      uses: gmsllc/wretry.action@js_action
       with:
         action: '${{ inputs.action }}'
         command: '${{ inputs.command }}'
@@ -50,3 +54,4 @@ runs:
         github_context: '${{ toJSON( github ) }}'
         job_context: '${{ toJSON( job ) }}'
         matrix_context: '${{ toJSON( matrix ) }}'
+        disable_pre_and_post: '${{ inputs.disable_pre_and_post }}'
